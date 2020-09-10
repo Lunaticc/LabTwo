@@ -12,26 +12,18 @@ public abstract class Book {
 
     private Library library;
 
+
+    // TODO: this is a nice thing to have
     public Book(String name, String author, int publishingYear, Status status) {
-        this.uniqueID = id++;
+        this.uniqueID = ++id;
         this.name = name;
         this.author = author;
         this.publishingYear = publishingYear;
         this.status = status;
-//        this.library = library;
-
     }
 
 
-    public String bookInformation() {
-        return "Book{" +
-                "uniqueID=" + uniqueID +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", publishingYear=" + publishingYear +
-                ", status=" + status +
-                '}';
-    }
+    public abstract String bookInformation();
 
     public int getUniqueID() {
         return uniqueID;
@@ -71,5 +63,10 @@ public abstract class Book {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 }

@@ -1,5 +1,6 @@
 package LibraryLabb.Users;
 
+import LibraryLabb.Books.Book;
 import LibraryLabb.Library;
 
 public abstract class Users {
@@ -12,30 +13,23 @@ public abstract class Users {
     private boolean isFaculty;
     private Library library;
 
-    public Users(String name, String address, String phoneNr, Boolean isFaculty) {
+    public Users(String name, String address, String phoneNr, Boolean isFaculty, Library library) {
         this.uniqueID = id++;
         this.name = name;
         this.address = address;
         this.phoneNr = phoneNr;
         this.isFaculty = isFaculty;
+        this.library = library;
     }
+    // TODO: Need to fix faculty members, and do some changes to the Student class!
 
-    @Override
-    public String toString() {
-        return "Users{" +
-                "uniqueID=" + uniqueID +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNr='" + phoneNr + '\'' +
-                ", isFaculty=" + isFaculty +
-                '}';
-    }
+    public abstract String userDescription();
 
-    public abstract  void borrowBook();
+    public abstract boolean borrowBook(Book book);
 
-    public abstract void returnBook();
+    public abstract void returnBook(Book book);
 
-    public abstract void payFine();
+    public abstract void payFine(double fine);
 
     public static int getId() {
         return id;
@@ -59,5 +53,9 @@ public abstract class Users {
 
     public Library getLibrary() {
         return library;
+    }
+
+    public boolean isFaculty() {
+        return isFaculty;
     }
 }

@@ -28,17 +28,24 @@ public class Library {
                 }
             }
             System.out.println("Adding " + book.getName() + " to library!");
+            book.setLibrary(this);
             books.add(book);
         }
 
         return false;
     }
 
+    public boolean removeBook(int id){
+        int i = getIndexOfBook(id);
+        books.remove(i);
+        return true;
+    }
     public boolean removeBook(Book book){
         if(book != null){
             for (Book b : books){
                 if(book.equals(b)){
                     System.out.println("Removing " + book.getName() + " from library");
+                    book.setLibrary(null);
                     books.remove(book);
                     return true;
                 }
@@ -47,11 +54,38 @@ public class Library {
         System.out.println("Cannot remove something that's not there");
         return false;
     }
-    // TODO: Update the book from whos ID this is
-    public boolean updateBook(int id){
+    // TODO: Update the book from who's ID this is
+    public boolean updateBook(int id, String name){
+        if(id > 0){
+            for (Book b : books){
+                if(b.getUniqueID() == id){
+                    books.get(getIndexOfBook(id)).setName(name);
+                }
+            }
+        }
         return false;
     }
+    private int getIndexOfBook(int id){
+        for (Book b : books){
+            if(b.getUniqueID() == id){
+                return books.indexOf(b);
+            }
+        }
+        return -1;
+    }
 
+    public boolean searchBook(int id){
+        if(id > 0){
+            for (Book b : books){
+                if(b.getUniqueID() == id){
+                    System.out.println("Book found with ID: " + id + "\n" + b.bookInformation());
+                    return true;
+                }
+            }
+        }
+        System.out.println("Sorry, could not find book: " + id);
+        return false;
+    }
     public boolean searchBook(Book book){
         if(book != null){
             for (Book b : books){
@@ -66,7 +100,12 @@ public class Library {
         return false;
     }
 
-    public boolean addUser(User user){
+    public void printBooks(){
+        for (Book b : books){
+            System.out.println(b.bookInformation());
+        }
+    }
+    public boolean addUser(Users user){
         if(user != null){
             for (Users u : users){
                 if(user.equals(u)){

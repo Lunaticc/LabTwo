@@ -6,4 +6,14 @@ public class GeneralBook extends Book {
         super(name, author, publishingYear, status);
     }
 
+    @Override
+    public String bookInformation() {
+        return "General Book{" +
+                "uniqueID=" + this.getUniqueID() +
+                ", name='" + this.getName() + '\'' +
+                ", author='" + this.getAuthor() + '\'' +
+                ", publishingYear=" + this.getPublishingYear() +
+                ", status=" + this.getStatus() +
+                '}';
+    }
 }

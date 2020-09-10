@@ -6,16 +6,18 @@ import LibraryLabb.Books.Status;
 public class Librarian{
     private String name;
     private Library library;
+    private double funds;
 
     public Librarian(String name, Library library) {
         this.name = name;
         this.library = library;
+        this.funds = 0;
     }
 
     public boolean issueBook(Book book){
         if(book != null){
             for (Book b : library.getBooks()){
-                if(b.getStatus().equals(Status.AVAILABLE)){
+                if(book.getStatus().equals(Status.AVAILABLE)){
                     System.out.println("The book is on file and you may borrow it");
                     int x = library.getBookIndex(book);
                     library.getBooks().get(x).setStatus(Status.UNAVAILABLE);
@@ -29,8 +31,21 @@ public class Librarian{
         return false;
     }
 
-    public Book returnBook(){
-        return null;
+
+    public boolean returnBook(Book book){
+        if (book != null) {
+
+                if(book.getStatus().equals(Status.UNAVAILABLE)){
+                    System.out.println("Returning book " + book.getName());
+                    int x = library.getBookIndex(book);
+                    library.getBooks().get(x).setStatus(Status.AVAILABLE);
+                }else {
+                    System.out.println("The book is already back!");
+                }
+
+        }
+        return true;
+
     }
 
     public void collectFine(int fine){
