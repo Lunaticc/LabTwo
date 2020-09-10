@@ -1,4 +1,4 @@
-package LibraryLabb;
+package LibraryLabb.Books;
 
 public enum Status {
     AVAILABLE,

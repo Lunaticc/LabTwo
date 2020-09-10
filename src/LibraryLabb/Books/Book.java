@@ -1,4 +1,6 @@
-package LibraryLabb;
+package LibraryLabb.Books;
+
+import LibraryLabb.Library;
 
 public abstract class Book {
     private static int id = 0;

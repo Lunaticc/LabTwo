@@ -1,6 +1,6 @@
-package LibraryLabb;
+package LibraryLabb.Books;
 
-public class ReferenceBooks extends Book{
+public class ReferenceBooks extends Book {
 
     public ReferenceBooks(String name, String author, int publishingYear, Status status) {
         super(name, author, publishingYear, status);
