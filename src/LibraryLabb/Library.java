@@ -107,7 +107,7 @@ public class Library {
     }
     public void addUser(Users user){
         users.add(user);
-    }
+    } // Legit lost everything here. as you can see :D
 
     /////GETTERS/////
 

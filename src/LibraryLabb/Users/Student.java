@@ -61,7 +61,11 @@ public class Student extends Users {
                 if(b.equals(book)){
                     getLibrary().getLibrarian().returnBook(book, this.getUniqueID());
                     borrowedBooks.remove(book);
-                    genBooks--;
+                    if(book instanceof GeneralBook){
+                        genBooks--;
+                    }else if(book instanceof AudioBook){
+                        audioBooks--;
+                    }
                     return true;
                 }
             }

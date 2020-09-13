@@ -11,8 +11,8 @@ public class FacultyMember extends Users{
     private int genBooks;
     private int audioBooks;
 
-    public FacultyMember(String name, String address, String phoneNr, Boolean isFaculty, Library library) {
-        super(name, address, phoneNr, isFaculty, library);
+    public FacultyMember(String name, String address, String phoneNr, Library library) {
+        super(name, address, phoneNr, true, library);
         borrowedBooks = new ArrayList<>();
         genBooks = 0;
         audioBooks = 0;

@@ -83,7 +83,7 @@ public class Main {
 
             printBetween();
 
-        Users faculty = new FacultyMember("Billy", "Heaven's road 42", "072280038", true, lib);
+        Users faculty = new FacultyMember("Billy", "Heaven's road 42", "072280038", lib);
         lib.addUser(faculty);
         FacultyMember f = (FacultyMember)faculty; // bad, bad, bad!
         ((FacultyMember) faculty).orderBook("General", "Boris's world", "Boris svensson", 1778);
