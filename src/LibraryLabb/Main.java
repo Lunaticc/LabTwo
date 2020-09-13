@@ -1,7 +1,7 @@
 package LibraryLabb;
 
-import AttemptOne.User;
 import LibraryLabb.Books.*;
+import LibraryLabb.Users.FacultyMember;
 import LibraryLabb.Users.Student;
 import LibraryLabb.Users.Users;
 
@@ -11,6 +11,7 @@ public class Main {
         //Library
         Library lib = new Library("General Library");
 
+//        Librarian librarian = new Librarian("Grace", lib);
         //General Books
         Book genBook = new GeneralBook("Billy's revenge", "Billy grace", 1997, Status.AVAILABLE);
         Book genBook2 = new GeneralBook("Billy's Magma", "Billy grace", 1997, Status.AVAILABLE);
@@ -23,9 +24,13 @@ public class Main {
 
 
         //Students
-        Users user = new Student("David", "Rymdgatan 34c", "0722118808", lib);
+        Users student1 = new Student("David", "Rymdgatan 34c", "0722118808", lib);
+        Users student2 = new Student("Mich", "Solstigsgatan 32d", "072218490", lib);
 
-        lib.addUser(user);
+
+
+        lib.addUser(student1);
+        lib.addUser(student1);
 //        System.out.println(book2.bookInformation());
         //Add books to list
         lib.addBook(genBook);
@@ -44,15 +49,15 @@ public class Main {
 //        System.out.println(lib.getBookIndex(book3));
         lib.searchBook(new GeneralBook("Billy's Downfall", "Billy grace" ,2012, Status.AVAILABLE));
 //        lib.searchBook(1);
-//        System.out.println("===============================");
+
 //        lib.printBooks();
-//        System.out.println("===============================");
+
 //        lib.removeBook(genBook);
 //        lib.printBooks();
-//        System.out.println("=======");
+
 //        lib.updateBook(2, "Stephen's vaganza");
 //        lib.printBooks();
-//        System.out.println("===============================");
+
 //        lib.searchBook(1);
 //        lib.searchBook(2);
 
@@ -61,13 +66,34 @@ public class Main {
 
             lib.printBooks();
             printBetween();
-            user.borrowBook(genBook);
-            user.borrowBook(genBook2);
-            user.borrowBook(genBook3);
+        System.out.println("Book borrowing/returning for student 1");
+            student1.borrowBook(genBook);
+            student1.borrowBook(genBook2);
+            student1.returnBook(genBook);
+            student1.borrowBook(genBook3);
             printBetween();
             lib.printBooks();
 
+            printBetween();
+        System.out.println("Book testing for student 2");
+        student2.borrowBook(genBook);
+        student2.borrowBook(book2);
+        student2.borrowBook(book3);
 
+
+            printBetween();
+
+        Users faculty = new FacultyMember("Billy", "Heaven's road 42", "072280038", true, lib);
+        lib.addUser(faculty);
+        FacultyMember f = (FacultyMember)faculty; // bad, bad, bad!
+        ((FacultyMember) faculty).orderBook("General", "Boris's world", "Boris svensson", 1778);
+        lib.printBooks();
+        ((FacultyMember) faculty).orderBook("Audio", "How to not do code", "David thiman", 2020);
+        lib.printBooks();
+
+        printBetween();
+
+        System.out.println(lib.getUsers());
 //        printBetween();
 //        lib.getLibrarian().issueBook(genBook);
 //        lib.getLibrarian().returnBook(book2);

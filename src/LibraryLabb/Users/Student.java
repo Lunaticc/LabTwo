@@ -3,9 +3,11 @@ package LibraryLabb.Users;
 import LibraryLabb.Books.*;
 import LibraryLabb.Library;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student extends Users {
-    private final int maxGenBooks = 2;
-    private final int maxAudBooks = 1;
+    private List<Book> borrowedBooks;
     private int genBooks;
     private int audioBooks;
 
@@ -13,6 +15,7 @@ public class Student extends Users {
         super(name, address, phoneNr, false, library);
         genBooks = 0;
         audioBooks = 0;
+        borrowedBooks = new ArrayList<>();
     }
 
     @Override
@@ -33,10 +36,12 @@ public class Student extends Users {
             if(book instanceof GeneralBook && genBooks < 2 && book.getStatus()== Status.AVAILABLE){
                 genBooks++;
                 getLibrary().getLibrarian().issueBook(book);
+                borrowedBooks.add(book);
                 return true;
             }else if(book instanceof AudioBook && audioBooks < 1 && book.getStatus()== Status.AVAILABLE){
                 audioBooks++;
                 getLibrary().getLibrarian().issueBook(book);
+                borrowedBooks.add(book);
                 return true;
             }else if(book instanceof ReferenceBooks){
                 System.out.println("Reference books cannot be borrowed or taken out of the library");
@@ -50,12 +55,31 @@ public class Student extends Users {
     }
 
     @Override
-    public void returnBook(Book book) {
-
+    public boolean returnBook(Book book) {
+        if (book != null) {
+            for (Book b : borrowedBooks){
+                if(b.equals(book)){
+                    getLibrary().getLibrarian().returnBook(book, this.getUniqueID());
+                    borrowedBooks.remove(book);
+                    genBooks--;
+                    return true;
+                }
+            }
+        }
+        System.out.println("Cannot return a book you have not borrowed");
+        return false;
     }
 
-    @Override
-    public void payFine(double fine) {
+    /////GETTERS/////
+    public List<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
 
+    public int getGenBooks() {
+        return genBooks;
+    }
+
+    public int getAudioBooks() {
+        return audioBooks;
     }
 }

@@ -32,24 +32,21 @@ public class Librarian{
     }
 
 
-    public boolean returnBook(Book book){
+    public boolean returnBook(Book book, int id){
         if (book != null) {
-
                 if(book.getStatus().equals(Status.UNAVAILABLE)){
                     System.out.println("Returning book " + book.getName());
                     int x = library.getBookIndex(book);
                     library.getBooks().get(x).setStatus(Status.AVAILABLE);
                 }else {
-                    System.out.println("The book is already back!");
+                    System.out.println("The book is already in!");
                 }
-
         }
         return true;
-
     }
 
     public void collectFine(int fine){
-
+        System.out.println("Collecting fine of: $" + fine);
     }
 
 }

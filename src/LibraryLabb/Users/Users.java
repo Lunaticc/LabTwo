@@ -27,9 +27,13 @@ public abstract class Users {
 
     public abstract boolean borrowBook(Book book);
 
-    public abstract void returnBook(Book book);
+    public abstract boolean returnBook(Book book);
 
-    public abstract void payFine(double fine);
+    public boolean payFine(int fine){
+        System.out.println("Paying fine of: $" + fine);
+        library.getLibrarian().collectFine(fine);
+        return false;
+    }
 
     public static int getId() {
         return id;

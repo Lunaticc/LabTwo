@@ -23,6 +23,17 @@ public abstract class Book {
     }
 
 
+    public static Book orderBook(String type, String name, String author, int publishingYear){
+        if (type.equalsIgnoreCase("General")){
+            return new GeneralBook(name ,author, publishingYear, Status.ORDERED);
+        } else if(type.equalsIgnoreCase("Audio")){
+            return new AudioBook(name, author, publishingYear, Status.ORDERED);
+        } else if(type.equalsIgnoreCase("Reference")){
+            return new ReferenceBooks(name, author, publishingYear, Status.ORDERED);
+        }
+        return null;
+    }
+
     public abstract String bookInformation();
 
     public int getUniqueID() {

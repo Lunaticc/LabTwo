@@ -1,6 +1,6 @@
 package LibraryLabb;
 
-import AttemptOne.User;
+
 import LibraryLabb.Books.Book;
 import LibraryLabb.Users.Users;
 
@@ -105,18 +105,8 @@ public class Library {
             System.out.println(b.bookInformation());
         }
     }
-    public boolean addUser(Users user){
-        if(user != null){
-            for (Users u : users){
-                if(user.equals(u)){
-
-                    System.out.println("Adding new user: " + user.getName());
-                    return false;
-                }
-            }
-        }
-        System.out.println("Cannot add something that's not a thing!");
-        return false;
+    public void addUser(Users user){
+        users.add(user);
     }
 
     /////GETTERS/////
