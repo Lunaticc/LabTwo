@@ -9,14 +9,15 @@ import java.util.List;
 
 public class Library {
 
+    private String name;
     private List<Book> books;
     private List<Users> users;
     private Librarian librarian;
 
     public Library(String name) {
+        this.name = name;
         this.books = new ArrayList<>();
         this.users = new ArrayList<>();
-        this.librarian = new Librarian(name, this);
     }
 
     public boolean addBook(Book book){
@@ -36,7 +37,7 @@ public class Library {
     }
 
     public boolean removeBook(int id){
-        int i = getIndexOfBook(id);
+        int i = getBookIndex(id);
         books.remove(i);
         return true;
     }
@@ -59,13 +60,13 @@ public class Library {
         if(id > 0){
             for (Book b : books){
                 if(b.getUniqueID() == id){
-                    books.get(getIndexOfBook(id)).setName(name);
+                    books.get(getBookIndex(id)).setName(name);
                 }
             }
         }
         return false;
     }
-    private int getIndexOfBook(int id){
+    private int getBookIndex(int id){
         for (Book b : books){
             if(b.getUniqueID() == id){
                 return books.indexOf(b);
@@ -125,5 +126,9 @@ public class Library {
 
     public Librarian getLibrarian() {
         return librarian;
+    }
+
+    public void setLibrarian(Librarian librarian) {
+        this.librarian = librarian;
     }
 }

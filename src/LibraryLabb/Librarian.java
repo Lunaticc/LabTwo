@@ -14,6 +14,8 @@ public class Librarian{
         this.funds = 0;
     }
 
+
+
     public boolean issueBook(Book book){
         if(book != null){
             for (Book b : library.getBooks()){
@@ -32,7 +34,7 @@ public class Librarian{
     }
 
 
-    public boolean returnBook(Book book, int id){
+    public boolean returnBook(Book book){
         if (book != null) {
                 if(book.getStatus().equals(Status.UNAVAILABLE)){
                     System.out.println("Returning book " + book.getName());
@@ -43,6 +45,10 @@ public class Librarian{
                 }
         }
         return true;
+    }
+
+    public void issueMembershipCard(){
+        System.out.println("Issuing membership card");
     }
 
     public void collectFine(int fine){

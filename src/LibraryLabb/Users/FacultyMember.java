@@ -3,25 +3,27 @@ package LibraryLabb.Users;
 import LibraryLabb.Books.*;
 import LibraryLabb.Library;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class FacultyMember extends Users{
-    private List<Book> borrowedBooks;
-    private int genBooks;
-    private int audioBooks;
 
     public FacultyMember(String name, String address, String phoneNr, Library library) {
         super(name, address, phoneNr, true, library);
-        borrowedBooks = new ArrayList<>();
-        genBooks = 0;
-        audioBooks = 0;
     }
 
-
     public void orderBook(String type, String name, String author, int publishingYeah){
-        Book orderedBook = Book.orderBook(type, name, author, publishingYeah);
+        Book orderedBook = bookToOrder(type, name, author, publishingYeah);
         getLibrary().addBook(orderedBook);
+    }
+
+    private static Book bookToOrder(String type, String name, String author, int publishingYear){
+        if (type.equalsIgnoreCase("General")){
+            return new GeneralBook(name ,author, publishingYear, Status.ORDERED);
+        } else if(type.equalsIgnoreCase("Audio")){
+            return new AudioBook(name, author, publishingYear, Status.ORDERED);
+        } else if(type.equalsIgnoreCase("Reference")){
+            return new ReferenceBooks(name, author, publishingYear, Status.ORDERED);
+        }
+        return null;
     }
 
 
@@ -48,35 +50,14 @@ public class FacultyMember extends Users{
         return false;
     }
 
-
     @Override
-    public boolean returnBook(Book book) {
-        if(book != null){
-            for (Book b : borrowedBooks){
-                if(b.equals(book)){
-                    getLibrary().getLibrarian().returnBook(book, this.getUniqueID());
-                    borrowedBooks.remove(book);
-                    if(book instanceof GeneralBook){
-                        genBooks--;
-                    } else if (book instanceof AudioBook) {
-                        audioBooks--;
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String userDescription() {
-        return "Faculty Member{" +
+    public String toString() {
+            return "Faculty Member{" +
                 "uniqueID=" + this.getUniqueID() +
                 ", name='" + this.getName() + '\'' +
                 ", address='" + this.getAddress() + '\'' +
                 ", phoneNr='" + this.getPhoneNr() + '\'' +
                 ", isFaculty=" + this.isFaculty() +
-                ", library=" + this.getLibrary() +
                 '}';
     }
 }
